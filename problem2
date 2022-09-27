@@ -1,0 +1,43 @@
+class ZooTicket {
+	guestsCount = 0
+	guestsName = []
+	guestsAge = []
+	totalCharges = 0
+
+	addPeople = (name, age) => {
+		this.guestsName.push(name)
+		this.guestsAge.push(age)
+
+		this.updateTotalCharges(age)
+	}
+
+	displayTicketDetails = () => {
+		for(let idx = 0; idx < this.guestsCount; idx++) {
+			console.log(`${this.guestsName[idx]} (age: ${this.guestsAge[idx]})`)
+		}
+	}
+
+	updateTotalCharges = (age) => {
+		if (age > 2 && age < 18) {
+			this.totalCharges += 100
+		} else if (age >= 18 && age < 60) {
+			this.totalCharges += 500
+		} else if (age >= 60) {
+			this.totalCharges += 300
+		}
+	}
+}
+
+
+zooTicket = new ZooTicket()
+zooTicket.guestsCount = parseInt(prompt('Enter total number of guests - '))
+
+for(let idx = 0; idx < zooTicket.guestsCount; idx++) {
+	name = prompt(`Enter Guest ${idx + 1} name - `)
+	age = prompt(`Enter Guest ${idx + 1} age - `)
+	zooTicket.addPeople(name, age)
+}
+
+console.log('Total charges -', zooTicket.totalCharges)
+
+zooTicket.displayTicketDetails()
